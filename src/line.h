@@ -23,6 +23,7 @@ class line {
     float waveAmp;
     float waveFreq;
     float waveSpeed;
+    float waveOffset;
     
 public:
     line();
@@ -31,7 +32,8 @@ public:
     void draw();
     
     void setWave(float amp, float freq, float speed);
-    
+    void setWave(float amp, float freq, float speed, float offset);
+
     void setPositions(vector<ofPoint> points);
     vector<ofPoint> getInitPos();
     vector<ofPoint> getDrawPos();

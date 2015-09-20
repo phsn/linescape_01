@@ -12,12 +12,12 @@ line::line(){}
 
 line::line(int segments){
     segCount = segments;
-    waveAmp, waveFreq, waveSpeed = 0;
+    waveAmp, waveFreq, waveSpeed, waveOffset = 0;
     
     for(int i=0; i < segCount; i++) {
-        initPos.push_back(ofPoint(0,0));
-        drawPos.push_back(ofPoint(0,0));
-        waveV.push_back(ofPoint(0,0));
+        initPos.push_back(ofPoint(0,0,0));
+        drawPos.push_back(ofPoint(0,0,0));
+        waveV.push_back(ofPoint(0,0,0));
     }
     
     this->update();
@@ -26,7 +26,7 @@ line::line(int segments){
 //--------------------------------------------------------------
 void line::update(){
     for (int i=0; i < segCount; i++) {
-        waveV[i] = ofPoint(0,waveAmp*sin((i*waveFreq)+ofGetElapsedTimef()*M_2_PI*waveSpeed));
+        waveV[i] = ofPoint(0,waveAmp*sin((i*waveFreq)+ofGetElapsedTimef()*M_2_PI*waveSpeed),waveAmp*cos((i*waveFreq)+ofGetElapsedTimef()*M_2_PI*waveSpeed));
         drawPos[i] = initPos[i] + waveV[i];
     }
 }
@@ -46,6 +46,14 @@ void line::setWave(float amp, float freq, float speed) {
     waveAmp = amp;
     waveFreq = freq;
     waveSpeed = speed;
+    waveOffset = 0;
+}
+
+void line::setWave(float amp, float freq, float speed, float offset) {
+    waveAmp = amp;
+    waveFreq = freq;
+    waveSpeed = speed;
+    waveOffset = offset;
 }
 
 //

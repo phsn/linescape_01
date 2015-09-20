@@ -5,6 +5,8 @@
 
 class ofApp : public ofBaseApp{
     
+    ofEasyCam myCamera;
+    
     line testLine;
     vector<ofPoint> pointList;
 
