@@ -37,12 +37,17 @@ line::line(int segments){
 void line::update(){
     float time = ofGetElapsedTimef() + waveOffset;
     for (int i=0; i < segCount; i++) {
+        
         waveV[i] = ofPoint(0,
                            waveAmp*sin((i*waveFreq)+time*M_2_PI*waveSpeed),
                            waveAmp*cos((i*waveFreq)+time*M_2_PI*waveSpeed));
+        
         noiseV[i] = ofPoint(0,
-                            1000*2*(ofNoise(i/float(segCount)*8.0, translation.z/zLimit*2-ofGetElapsedTimef()/2.0,ofGetElapsedTimef()/5.0)-0.5),
+                            1000*2*(ofNoise( i/float(segCount)*8.0,
+                                             translation.z/zLimit*2-ofGetElapsedTimef()/2.0,
+                                             ofGetElapsedTimef()/5.0)-0.5),
                             0);
+        
         drawPos[i] = initPos[i] + waveV[i] + noiseV[i] + translation;
     }
 }
