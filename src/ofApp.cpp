@@ -5,11 +5,11 @@ void ofApp::setup(){
     ofEnableAntiAliasing();
     ofEnableSmoothing();
 
-    scapeLines = 20;
+    scapeLines = 30;
     testScape = lineScape(scapeLines);
     
     myCamera.setDistance(2000);
-    myCamera.setupPerspective(true,80,0,25000, ofVec2f(0.0f, 0.0f));
+    myCamera.setupPerspective(true,80,100,30000, ofVec2f(0.0f, 0.0f));
 }
 
 //--------------------------------------------------------------
@@ -23,7 +23,7 @@ void ofApp::draw(){
     
     myCamera.begin();
     
-    ofTranslate(-ofGetWidth()*40,300,-(scapeLines*testScape.getSpacing())+2000);
+    ofTranslate(-ofGetWidth()*40,1000,-(scapeLines*testScape.getSpacing())+2000);
     testScape.draw();
     
     myCamera.end();
@@ -31,7 +31,11 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+    switch(key) {
+            case 'f':
+                ofToggleFullscreen();
+                break;
+    }
 }
 
 //--------------------------------------------------------------

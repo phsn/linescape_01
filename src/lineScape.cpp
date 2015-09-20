@@ -12,11 +12,11 @@ lineScape::lineScape(){}
 
 lineScape::lineScape(int numLines){
     
-    speed = 300;
+    speed = 200;
     spacing = 1000;
     numObj = numLines;
     
-    int numPoints = 200;
+    int numPoints = 300;
     
     for (int i=0; i < numPoints; i++) {
         pointList.push_back(ofPoint(i*(ofGetWidth()*80/float(numPoints-1)),ofGetHeight()/2,0));

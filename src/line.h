@@ -15,6 +15,7 @@
 
 class line {
     
+    ofMesh lineMesh;
     vector<ofPoint> initPos;
     vector<ofPoint> drawPos;
     int segCount;

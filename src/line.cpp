@@ -15,12 +15,19 @@ line::line(int segments){
     waveAmp, waveFreq, waveSpeed, waveOffset = 0;
     
     translation = ofPoint(0,0,0);
+    lineMesh.setMode(OF_PRIMITIVE_LINES);
     
     for(int i=0; i < segCount; i++) {
         initPos.push_back(ofPoint(0,0,0));
         drawPos.push_back(ofPoint(0,0,0));
         waveV.push_back(ofPoint(0,0,0));
         noiseV.push_back(ofPoint(0,0,0));
+        
+        lineMesh.addVertex(ofPoint(0,0,0));
+        if(i < (segCount-1)) {
+            lineMesh.addIndex(i);
+            lineMesh.addIndex(i+1);
+        }
     }
     
     this->update();
@@ -34,7 +41,7 @@ void line::update(){
                            waveAmp*sin((i*waveFreq)+time*M_2_PI*waveSpeed),
                            waveAmp*cos((i*waveFreq)+time*M_2_PI*waveSpeed));
         noiseV[i] = ofPoint(0,
-                            2000*2*(ofNoise(i/float(segCount)*10.0, translation.z/zLimit*2-ofGetElapsedTimef()/2.0,ofGetElapsedTimef()/5.0)-0.5),
+                            1000*2*(ofNoise(i/float(segCount)*8.0, translation.z/zLimit*2-ofGetElapsedTimef()/2.0,ofGetElapsedTimef()/5.0)-0.5),
                             0);
         drawPos[i] = initPos[i] + waveV[i] + noiseV[i] + translation;
     }
@@ -42,20 +49,17 @@ void line::update(){
 
 //--------------------------------------------------------------
 void line::draw(){
-    //cout << drawPos[0].z << " - " << drawPos[segCount-1].z << endl;
-    //cout << translation.z << " ";
+    
     for (int i=0; i < segCount; i++) {
-        //float alpha = ofMap(translation.z, 0, 3000,0.0,255.0);
         float alpha = translation.z/zLimit*255.0;
         //alpha *= 1.0-0.5*(1.0+cos(M_2_PI*10*i/float(segCount)));
         
         ofSetLineWidth(3);
         ofSetColor(ofColor(255,255,255,alpha));
-        //ofCircle(drawPos[i], 1);
-        if(i < (segCount-1)) {
-            ofLine(drawPos[i], drawPos[i+1]);
-        }
+        lineMesh.setVertex(i, drawPos[i]);
+        
     }
+    lineMesh.draw();
     
 }
 
