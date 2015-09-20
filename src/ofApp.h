@@ -1,15 +1,15 @@
 #pragma once
 
 #include "ofMain.h"
-#include "line.h"
+#include "lineScape.h"
 
 class ofApp : public ofBaseApp{
     
     ofEasyCam myCamera;
     
-    line testLine;
-    vector<ofPoint> pointList;
-
+    int scapeLines;
+    lineScape testScape;
+    
 	public:
 		void setup();
 		void update();

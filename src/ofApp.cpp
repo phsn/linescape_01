@@ -2,24 +2,19 @@
 
 //--------------------------------------------------------------
 void ofApp::setup(){
+    ofEnableAntiAliasing();
+    ofEnableSmoothing();
+
+    scapeLines = 20;
+    testScape = lineScape(scapeLines);
     
-    int numPoints = 60;
-    
-    for (int i=0; i < numPoints; i++) {
-        pointList.push_back(ofPoint(i*(ofGetWidth()/float(numPoints-1)),ofGetHeight()/2,0));
-    }
-    
-    testLine = line(numPoints);
-    testLine.setPositions(pointList);
-    testLine.setWave(30,0.1,10);
-    
-    pointList.clear();
-    
+    myCamera.setDistance(2000);
+    myCamera.setupPerspective(true,80,0,25000, ofVec2f(0.0f, 0.0f));
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    testLine.update();
+    testScape.update();
 }
 
 //--------------------------------------------------------------
@@ -28,8 +23,8 @@ void ofApp::draw(){
     
     myCamera.begin();
     
-    ofTranslate(-ofGetWidth()/2,-ofGetHeight()/2);
-    testLine.draw();
+    ofTranslate(-ofGetWidth()*40,300,-(scapeLines*testScape.getSpacing())+2000);
+    testScape.draw();
     
     myCamera.end();
 }

@@ -19,11 +19,19 @@ class line {
     vector<ofPoint> drawPos;
     int segCount;
     
+    ofPoint translation;
+    float opac;
+    
     vector<ofPoint> waveV;
     float waveAmp;
     float waveFreq;
     float waveSpeed;
     float waveOffset;
+    
+    vector<ofPoint> noiseV;
+    
+    
+    float zLimit;
     
 public:
     line();
@@ -31,13 +39,19 @@ public:
     void update();
     void draw();
     
+    
+    void setPositions(vector<ofPoint> points);
+    void setTranslation(ofPoint newPosition);
+    void move(ofPoint movingVector, float limitZ);
     void setWave(float amp, float freq, float speed);
     void setWave(float amp, float freq, float speed, float offset);
+    void setOpacity(float opacity);
 
-    void setPositions(vector<ofPoint> points);
     vector<ofPoint> getInitPos();
     vector<ofPoint> getDrawPos();
     int getSegmentCount();
+    ofPoint getTranslation();
+    float getProgress();
     
 };
 
