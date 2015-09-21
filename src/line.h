@@ -19,16 +19,22 @@ class line {
     vector<ofPoint> initPos;
     vector<ofPoint> drawPos;
     int segCount;
+    int length;
     
     ofPoint translation;
     float opac;
     
+    float bendFact;
+    float downresFact;
+    
+    double waveVal;
     vector<ofPoint> waveV;
     float waveAmp;
     float waveFreq;
     float waveSpeed;
     float waveOffset;
     
+    double noiseVal;
     vector<ofPoint> noiseV;
     
     
@@ -43,6 +49,8 @@ public:
     
     void setPositions(vector<ofPoint> points);
     void setTranslation(ofPoint newPosition);
+    void bend(float bendFactor);
+    void downres(float downresFactor);
     void move(ofPoint movingVector, float limitZ);
     void setWave(float amp, float freq, float speed);
     void setWave(float amp, float freq, float speed, float offset);

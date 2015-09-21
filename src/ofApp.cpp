@@ -9,7 +9,7 @@ void ofApp::setup(){
     testScape = lineScape(scapeLines);
     
     myCamera.setDistance(2000);
-    myCamera.setupPerspective(true,80,100,30000, ofVec2f(0.0f, 0.0f));
+    myCamera.setupPerspective(true,80,100,50000, ofVec2f(0.0f, 0.0f));
 }
 
 //--------------------------------------------------------------
@@ -23,7 +23,7 @@ void ofApp::draw(){
     
     myCamera.begin();
     
-    ofTranslate(-ofGetWidth()*40,1000,-(scapeLines*testScape.getSpacing())+2000);
+    ofTranslate(-ofGetWidth()*25,1000+ofGetHeight()/2.0,-(scapeLines*testScape.getSpacing())+2000);
     testScape.draw();
     
     myCamera.end();
